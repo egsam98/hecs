@@ -618,8 +618,7 @@ impl<'w, Q: Query> QueryBorrow<'w, Q> {
     }
 
     /// Execute the query
-    // The lifetime narrowing here is required for soundness.
-    pub fn iter(&mut self) -> QueryIter<'_, Q> {
+    pub fn iter(&mut self) -> QueryIter<'w, Q> {
         self.borrow();
         unsafe { QueryIter::new(self.world) }
     }
